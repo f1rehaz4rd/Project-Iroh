@@ -30,6 +30,9 @@
     <ClInclude Include="Iroh\Firewall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Iroh\EnableServices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utilities\StringUtilities.cpp">
@@ -39,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Iroh\Firewall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Iroh\EnableServices.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
