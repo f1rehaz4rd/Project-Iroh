@@ -139,9 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Iroh\User.h" />
     <ClInclude Include="Utilities\StringUtilities.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Iroh\User.cpp" />
     <ClCompile Include="Utilities\StringUtilities.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
