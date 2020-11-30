@@ -14,7 +14,6 @@ namespace Iroh {
 		this->password = Utilities::StringUtilities::strtowstr(newPassword);
 	}
 	
-	// NOT WORKING IN RELEASE
 	VOID IrohUser::SetSleepTime(INT timeInMilli) {
 		this->sleepTime = timeInMilli;
 	}

