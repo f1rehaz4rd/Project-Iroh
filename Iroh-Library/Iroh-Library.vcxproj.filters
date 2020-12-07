@@ -27,12 +27,18 @@
     <ClInclude Include="Iroh\User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Iroh\Firewall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utilities\StringUtilities.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="Iroh\User.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Iroh\Firewall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
