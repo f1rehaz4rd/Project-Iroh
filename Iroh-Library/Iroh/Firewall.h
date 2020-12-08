@@ -25,12 +25,15 @@
 
 namespace Iroh {
 
+	// Firewall class loops through the vector of firewall rules given and
+	// ensure that they are on the system to always allow traffic through.
+	// This class will halt code execution if the sleep is not set to zero and
+	// should be called in a thread if the sleep time is not greater than zero.
 	class Firewall {
 
+	// TODO: Make a CreateFirewallRule function for the struct.
 	public:
-		//
 		// Struct to hold all the firewall rule data.
-		//
 		struct FirewallRule {
 			std::wstring ruleName;
 			std::wstring ruleDescription;
@@ -39,22 +42,48 @@ namespace Iroh {
 			NET_FW_IP_PROTOCOL protocol;
 			NET_FW_RULE_DIRECTION direction;
 		};
-		std::vector<FirewallRule> listOfRules;
 
 		Firewall();
+
+		// Sets the sleep time between checks.
 		VOID SetSleepTime(INT);
+
+		// Adds a firewall rule to the list
 		VOID AddRule(FirewallRule);
+
+		// Starts the execution, make sure to call in a thread if you want 
+		// continued code execution.
 		VOID Start();
 
 	private:
 		// List of firewall rules that need to be checked.
+		std::vector<FirewallRule> listOfRules;
 		INT sleepTime;
 
+		// Calls upon the InsertRules function and then 
+		// sleeps for the set time.
 		VOID FirewallLoop();
+
+		// Loops through the list of firewall rules and calls 
+		// InsertFirewallRule to handle checking and inserting.
 		VOID InsertRules();
+
+		// Initializes the WFCOM object
 		HRESULT WFCOMInitialize(INetFwPolicy2**);
-		DWORD DumpFWRulesInCollection(INetFwRule*, FirewallRule*);
+
+		// Checks the INetFwRule against the FirewallRule that are passed.
+		// If the rule is there but, no the same as the FirewallRule->enabled
+		// the function sets it to whatever value FirewallRule->enabled is.
+		// Return: 1 for true, 0 for false
+		DWORD FWRuleCompare(INetFwRule*, FirewallRule*);
+		
+		// Checks the firewall rules that are currently on the system
+		// against the passed rule.
+		// Return: 1 for true, 0 for false
 		DWORD CheckFirewall(FirewallRule*);
+
+		// Inserts the passed firewall rule in the firewall. It checks to
+		// see if the rule is there already before inserting.
 		DWORD InsertFirewallRule(FirewallRule*);
 	};
 
