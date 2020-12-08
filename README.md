@@ -25,17 +25,17 @@ using namespace Iroh;
 int main() {
 
     // Initialize the class object
-	IrohUser irohUser = IrohUser();
+    IrohUser irohUser = IrohUser();
 
     // Use setters to set the class variables
-	irohUser.SetUsername("f1rehaz4rd");
-	irohUser.SetPassword("SecurePassword-123!");
-	irohUser.SetSleepTime(20000);
+    irohUser.SetUsername("f1rehaz4rd");
+    irohUser.SetPassword("SecurePassword-123!");
+    irohUser.SetSleepTime(20000);
 	
     // Start the process
     irohUser.Start();
 
-	return 0;
+    return 0;
 }
 ```
 
