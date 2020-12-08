@@ -6,6 +6,10 @@
 #include <string>
 
 namespace Utilities {
+
+	// StringUtilities is a simple class to do some conversions
+	// so that the code doesn't have to be repeatedly written in
+	// multiple places.
 	class StringUtilities {
 	public:
 		// Converts std::wstring to std::string

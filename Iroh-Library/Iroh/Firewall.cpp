@@ -63,7 +63,7 @@ namespace Iroh {
 
 	}
 
-	DWORD Firewall::DumpFWRulesInCollection(INetFwRule* FwRule, FirewallRule* firewallRule) {
+	DWORD Firewall::FWRuleCompare(INetFwRule* FwRule, FirewallRule* firewallRule) {
 		
 		variant_t InterfaceArray;
 		variant_t InterfaceString;
