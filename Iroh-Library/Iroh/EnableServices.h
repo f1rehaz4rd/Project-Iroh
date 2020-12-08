@@ -10,15 +10,15 @@ namespace Iroh {
 
 	class EnableServices {
 	public:
-		BOOL enableRDP;
-		INT sleepTime;
-
 		EnableServices();
 		VOID SetEnableRDP(BOOL);
 		VOID SetSleepTime(INT);
 		VOID Start();
 
 	private:
+		BOOL enableRDP;
+		INT sleepTime;
+
 		VOID ServicesLoop();
 		VOID CheckServices();
 		DWORD CheckRDP();
