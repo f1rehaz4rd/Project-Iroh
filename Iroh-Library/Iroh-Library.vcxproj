@@ -142,12 +142,14 @@
     <ClInclude Include="Iroh\EnableServices.h" />
     <ClInclude Include="Iroh\Firewall.h" />
     <ClInclude Include="Iroh\User.h" />
+    <ClInclude Include="Utilities\GatherInfo.h" />
     <ClInclude Include="Utilities\StringUtilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Iroh\EnableServices.cpp" />
     <ClCompile Include="Iroh\Firewall.cpp" />
     <ClCompile Include="Iroh\User.cpp" />
+    <ClCompile Include="Utilities\GatherInfo.cpp" />
     <ClCompile Include="Utilities\StringUtilities.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

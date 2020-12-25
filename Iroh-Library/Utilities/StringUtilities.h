@@ -17,7 +17,7 @@ namespace Utilities {
 
 		// Converts std::string to std::wstring
 		static std::wstring strtowstr(std::string str);
-};
+	};
 }
 
 #endif // !IROH_IROHLIBRARY_UTILITIES_STRINGUTILITIES_H

@@ -33,6 +33,9 @@
     <ClInclude Include="Iroh\EnableServices.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Utilities\GatherInfo.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utilities\StringUtilities.cpp">
@@ -46,6 +49,9 @@
     </ClCompile>
     <ClCompile Include="Iroh\EnableServices.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\GatherInfo.cpp">
+      <Filter>Source Files\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
