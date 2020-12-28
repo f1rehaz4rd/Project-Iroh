@@ -24,9 +24,40 @@ namespace Utilities {
 	}
 
 	std::string GatherInfo::GetPrimaryIP() {
+		char hostname[256];
+		WSADATA wsaData;
+
+		PDNS_RECORD pDnsRecord;
+		DNS_STATUS dnsStatus;
+
+		IN_ADDR ipAddr;
+		std::string strIP;
+
+		if (WSAStartup(0x101, &wsaData) != 0) 
+			return "";
+
+		gethostname(hostname, 256);
 		
+		dnsStatus = DnsQuery_A(
+			(PCSTR)hostname,
+			DNS_TYPE_A,
+			DNS_QUERY_STANDARD,
+			NULL,
+			&pDnsRecord,
+			NULL);
+
+		if (dnsStatus) {
+			printf("Failed %d \n", dnsStatus);
+			return "";
+		}
 		
-		return std::string();
+		ipAddr.S_un.S_addr = (pDnsRecord->Data.A.IpAddress);
+		strIP = inet_ntoa(ipAddr);
+
+		WSACleanup();
+		DnsRecordListFree(pDnsRecord, DnsFreeRecordList);
+
+		return strIP;
 	}
 
 	std::vector<std::string> GatherInfo::GetSystemIPs() {
