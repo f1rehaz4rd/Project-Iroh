@@ -93,9 +93,14 @@ namespace Utilities {
 	}
 
 	std::string GatherInfo::GetHostname() {
+		TCHAR hostname[MAX_COMPUTERNAME_LENGTH + 1];
+		DWORD hostnameSize = sizeof(hostname) / sizeof(hostname[0]);
 
+		if (!GetComputerName(hostname, &hostnameSize))
+			return "";
 
-		return std::string();
+		std::wstring hostnameStr = hostname;
+		return StringUtilities::wstrtostr(hostnameStr);
 	}
 
 	std::string GatherInfo::GetMACAddr() {
