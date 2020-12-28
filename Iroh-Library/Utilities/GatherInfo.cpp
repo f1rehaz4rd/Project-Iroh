@@ -62,8 +62,34 @@ namespace Utilities {
 
 	std::vector<std::string> GatherInfo::GetSystemIPs() {
 
+		std::vector<std::string> ipList;
+		PIP_ADAPTER_INFO adapterInfo;
+		ULONG adapterInfoSize, status;
 
-		return std::vector<std::string>();
+		adapterInfo = NULL;
+
+		if ((status = GetAdaptersInfo(NULL, &adapterInfoSize))
+			!= ERROR_BUFFER_OVERFLOW)
+			goto Cleanup;
+
+		adapterInfo = reinterpret_cast<PIP_ADAPTER_INFO>(malloc(adapterInfoSize));
+		if (adapterInfo == NULL)
+			goto Cleanup;
+
+		if ((status = GetAdaptersInfo(adapterInfo, &adapterInfoSize)) 
+			!= ERROR_SUCCESS)
+			goto Cleanup;
+
+		while (adapterInfo) {
+			ipList.push_back(adapterInfo->IpAddressList.IpAddress.String);
+			adapterInfo = adapterInfo->Next;
+		}
+	
+	Cleanup:
+		if (adapterInfo)
+			free(adapterInfo);
+
+		return ipList;
 	}
 
 	std::string GatherInfo::GetHostname() {

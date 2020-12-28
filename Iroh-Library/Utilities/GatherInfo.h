@@ -4,9 +4,11 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 
 #pragma comment(lib, "Dnsapi.lib")
+#pragma comment(lib, "iphlpapi.lib")
 #pragma comment(lib, "Ws2_32.lib")
 
 #include <Windows.h>
+#include <iphlpapi.h>
 #include <WinDNS.h>
 #include <WinSock2.h>
 
@@ -17,6 +19,9 @@
 
 #define GUIDREGISTRYPATH L"SOFTWARE\\Microsoft\\Cryptography"
 #define MACHINEGUID L"MachineGuid"
+
+#define MALLOC(x) HeapAlloc(GetProcessHeap(), 0, (x)) 
+#define FREE(x) HeapFree(GetProcessHeap(), 0, (x))
 
 namespace Utilities {
 
