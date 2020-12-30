@@ -3,13 +3,11 @@
 #define WIN32_LEAN_AND_MEAN
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 
-#pragma comment(lib, "Dnsapi.lib")
 #pragma comment(lib, "iphlpapi.lib")
 #pragma comment(lib, "Ws2_32.lib")
 
 #include <Windows.h>
 #include <iphlpapi.h>
-#include <WinDNS.h>
 #include <WinSock2.h>
 
 #include <string>
