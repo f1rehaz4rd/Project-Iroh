@@ -175,9 +175,65 @@ namespace Utilities {
 		return MACAddr;
 	}
 
-	std::string GatherInfo::GetWinVer() {
+	std::string GatherInfo::GetWinVer() {	
+		//
+		// Set up variables
+		//
+		HKEY hkey;
+		
+		TCHAR data[MAX_PATH];
+		DWORD dSize = MAX_PATH;
 
+		TCHAR data2[MAX_PATH];
+		DWORD dSize2 = MAX_PATH;
 
-		return std::string();
+		long err;
+
+		std::wstring winver = L"";
+		
+		if ((err = RegOpenKeyEx(
+			HKEY_LOCAL_MACHINE,
+			WINVERREGISTRYPATH,
+			0,
+			KEY_READ,
+			&hkey)) != ERROR_SUCCESS)
+			goto Cleanup;
+
+		//
+		// Gets the first version section
+		//
+		if ((err = RegQueryValueEx(
+			hkey,
+			PRODUCTNAMEKEY,
+			NULL,
+			NULL,
+			(LPBYTE)&data,
+			&dSize) != ERROR_SUCCESS))
+			goto Cleanup;
+
+		//
+		// Gets the second version section
+		//
+		if ((err = RegQueryValueEx(
+			hkey,
+			RELEASEIDKEY,
+			NULL,
+			NULL,
+			(LPBYTE)&data2,
+			&dSize2) != ERROR_SUCCESS))
+			goto Cleanup;
+
+		//
+		// Combine the information
+		//
+		winver = data;
+		winver = winver + L" - " + data2;
+
+	Cleanup:
+
+		if (hkey != NULL) 
+			RegCloseKey(hkey);
+
+		return StringUtilities::wstrtostr(winver);
 	}
 }

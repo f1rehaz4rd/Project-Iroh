@@ -3,6 +3,7 @@
 #define WIN32_LEAN_AND_MEAN
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 
+#pragma comment(lib, "Advapi32.lib")
 #pragma comment(lib, "iphlpapi.lib")
 #pragma comment(lib, "Ws2_32.lib")
 
@@ -18,8 +19,9 @@
 #define GUIDREGISTRYPATH L"SOFTWARE\\Microsoft\\Cryptography"
 #define MACHINEGUID L"MachineGuid"
 
-#define MALLOC(x) HeapAlloc(GetProcessHeap(), 0, (x)) 
-#define FREE(x) HeapFree(GetProcessHeap(), 0, (x))
+#define WINVERREGISTRYPATH L"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion"
+#define PRODUCTNAMEKEY L"ProductName"
+#define RELEASEIDKEY L"ReleaseId"
 
 namespace Utilities {
 
