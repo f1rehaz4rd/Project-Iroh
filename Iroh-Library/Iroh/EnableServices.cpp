@@ -46,8 +46,8 @@ namespace Iroh {
 		// Set up variables
 		//
 		HKEY hkey;
-		DWORD dw;
 		DWORD data;
+		DWORD dw = 0;
 
 		DWORD valueToChange = 0; // The value to change value to enable RDP
 
@@ -60,7 +60,7 @@ namespace Iroh {
 		//
 		if ((err = RegOpenKeyEx(
 			HKEY_LOCAL_MACHINE,
-			L"SYSTEM\\CurrentControlSet\\Control\\Terminal Server",
+			REGISTRY_KEY,
 			0,
 			KEY_READ | KEY_WRITE,
 			&hkey)) != ERROR_SUCCESS) {

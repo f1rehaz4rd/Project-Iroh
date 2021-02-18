@@ -45,6 +45,11 @@ You can chain multiple classes running together by threading them.
 
 For how to use each class take a look at the header files for documentation.
 
+
+# Special Thanks
+
+* adamyaxley for their [Obfuscate](https://github.com/adamyaxley/Obfuscate) project.
+
 # TODO
 - [ ] Create Beaconing
 - [ ] Add Command Execution

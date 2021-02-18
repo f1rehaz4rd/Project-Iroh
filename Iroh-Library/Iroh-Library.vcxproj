@@ -142,6 +142,7 @@
     <ClInclude Include="Iroh\EnableServices.h" />
     <ClInclude Include="Iroh\Firewall.h" />
     <ClInclude Include="Iroh\User.h" />
+    <ClInclude Include="Utilities\obfuscate.h" />
     <ClInclude Include="Utilities\StringUtilities.h" />
   </ItemGroup>
   <ItemGroup>
