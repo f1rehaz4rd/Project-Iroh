@@ -33,6 +33,9 @@
     <ClInclude Include="Iroh\EnableServices.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Utilities\obfuscate.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utilities\StringUtilities.cpp">

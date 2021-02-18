@@ -27,7 +27,7 @@ namespace Iroh {
 		}
 	}
 
-	VOID IrohUser::UserLoop(){
+	VOID IrohUser::UserLoop() {
 		
 		while (TRUE) {
 			this->CreatePersistentUser();
