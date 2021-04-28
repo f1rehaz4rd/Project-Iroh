@@ -234,7 +234,7 @@ namespace Iroh {
 				if (SUCCEEDED(hr))
 				{
 					// Output the properties of this rule
-					result = DumpFWRulesInCollection(pFwRule, firewallRule);
+					result = FWRuleCompare(pFwRule, firewallRule);
 					if (result == 1)
 						goto Cleanup;
 				}
